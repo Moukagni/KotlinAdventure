@@ -1,6 +1,7 @@
 package jeu
 
 import personnage.Personnage
+import kotlin.random.Random
 
 class Combat(
     val jeu :Jeu,
@@ -12,7 +13,14 @@ class Combat(
     fun tourDeJoueur() {
         println("\u001B[34m ---Tour de ${this.jeu.joueur.nom} (pv: ${this.jeu.joueur.pointDeVie}) ---")
        //TODO Mission 1.2
-        this.jeu.joueur.attaque(monstre)
+
+        println("Choisissez une action : 1 => attaquer 2 => passer")
+        var actionJoueur = readln().toString()
+
+        if (actionJoueur == "1")
+            this.jeu.joueur.attaque(monstre)
+        else if (actionJoueur == "2")
+            println("${this.jeu.joueur.nom} passe son tour.")
         println("\u001b[0m")
     }
 
@@ -20,8 +28,17 @@ class Combat(
     fun tourDeMonstre() {
         println("\u001B[31m---Tour de ${monstre.nom} (pv: ${monstre.pointDeVie}) ---")
         //TODO Mission 1.3
-        this.monstre.attaque(this.jeu.joueur)
-        println("\u001b[0m")
+
+        println("Le tour du monstre ${monstre.nom}.")
+
+        val actionProbabilite = Random.nextInt(1,101)
+        if (actionProbabilite <= 70){
+            println("${monstre.nom} décide d'attaquer le joueur ${this.jeu.joueur.nom}")
+            println("\u001b[0m")
+            monstre.attaque(this.jeu.joueur)
+        }else{
+            println("${monstre.nom} choisit de passer son tour .")
+        }
     }
 
     // Méthode pour exécuter le combat complet

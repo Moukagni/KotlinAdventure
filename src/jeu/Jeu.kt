@@ -44,12 +44,36 @@ class Jeu(monstres: List<Personnage>) {
      *
      */
     fun creerPersonnage(): Personnage {
-        println("Création votre personnage:")
+        println("Création de votre personnage:")
+        val nom = readln().toString()
+
+        println("Vous avez 40 points d'attributs à répartir :")
+        var total: Int = 0
+        var attaque = 0
+        var defense = 0
+        var endurance = 0
+        var vitesse = 0
+        var pointDeVieMax = 0
+
+        while (total > 40 || total < 40) {
+            attaque = readln().toInt()
+            defense = readln().toInt()
+            endurance = readln().toInt()
+            vitesse = readln().toInt()
+            pointDeVieMax = 50 + (10 * endurance)
+            total = attaque + defense + endurance + vitesse
+            if (total > 40 )
+                println("Vous avez distribué $total points , ce qui est supérieur à 40 . VEUILLEZ RÉESSAYER")
+            else if (total < 40)
+                println("Vous avez seulement attribué $total points, veuillez réessayer en attribuant tout vos points.")
+            else
+                println("Attribution de $total points RÉUSSI ! ")
+        }
+
         // TODO Mission 1.1
-        val hero = Personnage("YYY",150,150,12,8,8,12)
-        this.joueur= hero
+        val hero = Personnage(nom,pointDeVieMax,pointDeVieMax,attaque,defense,endurance,vitesse)
+        this.joueur = hero
         return hero
     }
-    
 
 }
