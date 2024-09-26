@@ -1,6 +1,9 @@
 package personnage
 
- class Personnage(
+import item.Arme
+import item.Armure
+
+class Personnage(
     val nom: String,
     var pointDeVie: Int,
     val pointDeVieMax: Int,
@@ -8,7 +11,25 @@ package personnage
     var defense: Int,
     var endurance: Int,
     var vitesse: Int,
+    var inventaire: MutableList<item.Item>? = null,
+    var armePrincipal: Arme? = null,
+    var armeSecondaire: Arme? = null,
+    var armurePrinc: Armure? = null
 ) {
+    fun equiperArmePrinc(arme: Arme){
+        if (inventaire?.contains(arme) == true){
+            armePrincipal = arme
+            println("$nom à équipé l'arme ${arme.nom} comme arme principale")
+        }else{
+            println("L'arme ${arme.nom} n'est pas son arme Principale.")
+        }
+    }
+    fun equiperArmurePrinc(armure: Armure){
+        if (inventaire?.contains(armure) == true){
+            armurePrinc = armure
+            println("$nom à équipé l'arme ${armure.nom} comme arme principale")
+        }
+    }
 
      fun calculeDefense():Int{
          //TODO Mission 4.2

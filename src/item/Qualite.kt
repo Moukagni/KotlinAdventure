@@ -1,5 +1,11 @@
 package item
 
-class Qualite (val nom:String, val bonusRarete: Int, val couleur:String) {
+import jeu.TirageDes
+
+class Qualite (
+    nom: String,
+    val bonusQualite: Int,
+    val couleur:String
+) {
 
 }
